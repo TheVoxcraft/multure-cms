@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import Author, Category, Article
 
 # Create your views here.
 
@@ -7,4 +8,9 @@ def home(request):
 
 
 def article(request, url_title):
-    return render(request, 'article.html')
+    try:
+        article = Article.objects.get(url_title=url_title)
+    except Article.DoesNotExist:
+        return render(request, '404.html')
+    
+    return render(request, 'article.html', {'article': article})
