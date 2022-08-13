@@ -3,6 +3,8 @@ h1 {
     font-size: 2.3rem;
     letter-spacing: 2px;
     font-weight: 500;
+    margin-left: 3rem;
+    margin-right: 3rem;
 }
 h3 {
     font-size: 1.4rem;
@@ -130,7 +132,7 @@ p a:hover{
     .hero-title {
         position: absolute;
         bottom: 2rem;
-        left: -42rem;
+        left: -44rem;
         width: 32rem;
         line-height: 1.5;
         text-align: left;
