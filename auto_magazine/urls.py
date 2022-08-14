@@ -15,11 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.views.generic.base import RedirectView
+
 import cms.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', cms.views.home, name='home'),
     path('a/<str:url_title>/', cms.views.article, name='article'),
+    #path('category/<str:category_name>/', cms.views.category, name='category'),
     
 ]

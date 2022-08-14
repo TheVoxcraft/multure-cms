@@ -10,9 +10,12 @@ class Author(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     def __str__(self):
         return self.name
+
+class ArticleMetadata(models.Model):
+    topic = models.CharField(max_length=100, null=True, blank=True)
 
 class Article(models.Model):
     author = models.ForeignKey(Author, on_delete=models.PROTECT)
@@ -23,3 +26,8 @@ class Article(models.Model):
     tags = models.CharField(max_length=128, blank=True, null=True)
     article_image = models.CharField(max_length=256, null=True, blank=True)
     content = models.TextField()
+    
+    views = models.IntegerField(default=0)
+    metadata = models.OneToOneField(ArticleMetadata, on_delete=models.CASCADE, null=True, blank=True)
+
+

@@ -27,6 +27,12 @@
 
     <!-- Database content is inserted underneath here. -->
     {{ article.content|safe }}
+
+
+    <div class="article-info">
+        </br>
+        <p>Tags: {{ article.tags }}</p>
+    </div>
 </div>
 </div>
 {% endblock content %}
