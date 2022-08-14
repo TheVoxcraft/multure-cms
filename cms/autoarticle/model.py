@@ -48,3 +48,17 @@ class SentanceSimilarityAPI:
     }
     similarity_values = requests.post(self.API_URL, headers=self.headers, json=payload).json()
     return sorted(list(zip(sentences, similarity_values)), key=lambda x: x[1], reverse=True)
+
+
+class ZeroShotClassificationAPI:
+  def __init__(self, API_KEY):
+    self.API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-mnli"
+    self.headers = {"Authorization": f"Bearer {API_KEY}"}
+
+  def query(self, inputs: str, candidate_labels: List[str]):
+    payload = {
+      "inputs": f"{inputs}",  
+      "parameters": {"candidate_labels": candidate_labels},
+      }
+    output = requests.post(self.API_URL, headers=self.headers, json=payload).json()
+    return sorted(list(zip(output['labels'], output['scores'])), key=lambda x: x[1], reverse=True)
