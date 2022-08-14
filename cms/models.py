@@ -16,6 +16,8 @@ class Category(models.Model):
 
 class ArticleMetadata(models.Model):
     topic = models.CharField(max_length=100, null=True, blank=True)
+    short_summary = models.TextField(null=True, blank=True)
+    
 
 class Article(models.Model):
     author = models.ForeignKey(Author, on_delete=models.PROTECT)

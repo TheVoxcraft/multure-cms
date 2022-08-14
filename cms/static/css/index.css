@@ -1,0 +1,144 @@
+body {
+    margin: 0 auto;
+}
+
+h2 {
+    font-weight: 300;
+}
+.hero-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.25rem;
+}
+
+.hero-container div {
+    min-width: 0;
+    margin-bottom: 2rem;
+}
+
+.hero-wrapper {
+    display: grid;
+    gap: 0.7rem;
+    max-width: 1400px;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+
+.hero-article {
+    min-height: 300px;
+}
+
+.hero-article img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-article h1 {
+    position: absolute;
+    top: -4.5rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+
+    font-size: 1.3rem;
+    color: white;
+    letter-spacing: 1px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.main-hero h1 {
+    top: -8.5rem;
+    font-size: 2rem;
+}
+
+.category-btn {
+    display: none;
+    padding: 0.3rem;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+    background-color: white;
+
+}
+
+.category-btn-over {
+    position: absolute;
+    top: -13rem;
+    margin-left: 1.5rem;
+}
+
+.category-btn a {
+    font-family: 'Archivo Black', sans-serif;
+    text-transform: uppercase;
+    color: #81623e;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+}
+
+.article-section {
+    margin: 1rem;
+    margin-right: 18%;
+}
+
+.card-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));    
+    gap: 1rem;
+}
+
+.article-wrapper {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+.article-wrapper img {
+    max-width: 270px;
+}
+.article-content h3 {
+    font-family: 'Archivo Black', sans-serif;
+    font-weight: 200;
+    font-size: 1.2rem;
+}
+
+.article-card img {
+    width: 100%;
+    max-width: 700px;
+}
+
+/* Desktop */
+@media (min-width: 780px) {
+    .category-btn {
+        display: inline-block;
+    }
+    .main-hero {
+        grid-row: span 2 / auto;
+        grid-column: span 2 / auto;
+    }
+    .hero-article h1 {
+        top: -5.5rem;
+        font-size: 1.4rem;
+        text-align: left;
+    }
+    .main-hero h1 {
+        top: -11rem;
+        font-size: 2.5rem !important;
+    }
+}
+
+/* Very small */
+@media (max-width: 570px) {
+    .hero-article h1 {
+        font-size: 1.2rem;
+    }
+    .main-hero h1 {
+        font-size: 1.8rem !important;
+    }
+    .article-section {
+        margin: 0.5rem;
+    }
+}

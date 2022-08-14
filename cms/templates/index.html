@@ -2,9 +2,66 @@
 
 {% block title %}AutoMagazine{% endblock %}
 
+{% block head_page%}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock head_page %}
+
 {% block content %}
-<div class="container">
-    <p>Hi</p>
+<div class="hero-container">
+    <div class="hero-wrapper">
+        <div class="hero-article main-hero">
+            <img src="{{ hero_articles.0.article_image }}" alt="">
+            <div style="position: relative;">
+                <h1>{{ hero_articles.0.title }}</h1>
+                <span class="category-btn category-btn-over">
+                    <a href="#">{{ hero_articles.0.category.name }}</a>
+                </span>
+            </div>
+        </div>
+        {% for article in hero_articles|slice:"1:" %}
+            <div class="hero-article">
+                <img src="{{ article.article_image }}" alt="{{ article.title }}">
+                <div style="position: relative;">
+                    <h1>{{ article.title }}</h1>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="flex-center">
+    <div style="width: 75%">
+        <div class="article-section">
+            <h2>LATEST STORIES</h2>
+            {% for article in articles %}
+                <div class="article-wrapper">
+                    <img src="{{ article.article_image }}" alt="{{ article.title }}">
+                    <div class="article-content">
+                        <h3>{{ article.title }}</h3>
+                        <p>Lorem ipsum article to read</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div>
+            <h2>TRENDING</h2>
+            <div class="card-section">
+                {% for article in articles %}
+                    <div class="article-card">
+                        <img src="{{ article.article_image }}" alt="{{ article.title }}">
+                        <span class="category-btn">
+                            <a href="#">{{ article.category.name }}</a>
+                        </span>
+                        <div class="article-content">
+                            <h3>{{ article.title }}</h3>
+                            <p>Lorem ipsum article to read</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock content %}

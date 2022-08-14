@@ -116,6 +116,10 @@ p a:hover{
     box-shadow: none !important;
 }
 
+.article-info .tag {
+    color: #676767;
+}
+
 .hero-category {
     display: block;
     font-family: 'Archivo Narrow', sans-serif;

@@ -8,8 +8,10 @@ def home(request):
     articles = Article.objects.all().order_by('-published_date')
     
     hero_articles = articles[:3]
-    return render(request, 'index.html', {'articles': articles, 'hero_articles': hero_articles})
-
+    trending = articles.order_by('-views')
+    return render(request, 'index.html', {'articles': articles, 
+                                          'hero_articles': hero_articles, 
+                                          'trending_articles': trending})
 
 def article(request, url_title):
     # Style based off https://hiconsumption.com/
