@@ -1,10 +1,14 @@
 from typing import List
 
 from django.conf import settings
+from django.utils.text import slugify
+
+from .autoarticle.generate import ArticleGenerator
 
 from .autoarticle.model import OpenAIAPI, SentanceSimilarityAPI, ZeroShotClassificationAPI
 from .models import Article, ArticleMetadata, Category
 from .autoarticle.metadata import MetadataGenerator
+import unsplash
 
 def generate_article_metadata(article : Article):
     # Check if a metadata object already exists for this article
@@ -34,14 +38,31 @@ def generate_article_metadata(article : Article):
     
     article.save()
     metadata.save()
+    
+    if article.article_image is None:
+        print("Setting image for article")
+        set_image_from_tags(article)
 
-    
-    
 
 def generate_article_content(article: Article):
-    title = article.title
-    author = article.author
-    category = article.category
+    pass
+
+
+def generate_independant_article():
+    model = OpenAIAPI(settings.OPENAI_API_KEY)
+    generator = ArticleGenerator(model)
     
-    article.content = '<p>This is the content of the article.</p>'
+    article_title = generator.new_article_name()
+    article_body = generator.write_independant_article(article_title)
+    
+    # Create article object
+    article = Article.objects.create(title=article_title, content=article_body, url_title=slugify(article_title))
+    generate_article_metadata(article)
+
+
+def set_image_from_tags(article : Article):
+    tags = article.tags.split(',')
+    image_src = unsplash.get_image_by_query(' '.join(tags[:3]))
+    article.article_image = image_src
     article.save()
+    

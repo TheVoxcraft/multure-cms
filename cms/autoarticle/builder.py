@@ -15,7 +15,7 @@ class Text(ArticleItem):
         return f"<p>{content}</p>"
 
 class Chapter(ArticleItem):
-    def __init__(self, content: str, subtitle: str):
+    def __init__(self, content: str, subtitle: str = ""):
         self.content = escape(content.strip())
         self.subtitle = escape(subtitle.strip())
         

@@ -17,7 +17,7 @@ class OpenAIAPI():
         openai.api_key = API_KEY
         self.used_tokens = 0
     def prompt(self, prompt, model : OpenAIModelTypes=OpenAIModelTypes.curie,
-               temperature=0.7, max_tokens=256, frequency_penalty=0, presence_penalty=0):
+               temperature=0.7, max_tokens=256, frequency_penalty=0, presence_penalty=0, stop=None):
         inference = openai.Completion.create(
           model=model.value,
           prompt=prompt,
@@ -25,7 +25,8 @@ class OpenAIAPI():
           max_tokens=max_tokens,
           top_p=1,
           frequency_penalty=frequency_penalty,
-          presence_penalty=presence_penalty
+          presence_penalty=presence_penalty,
+          stop=stop
         )
         
         self.used_tokens += inference['usage']['total_tokens']
