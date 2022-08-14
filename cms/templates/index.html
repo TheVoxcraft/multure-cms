@@ -49,7 +49,7 @@
             {% for article in articles %}
                 <div class="article-wrapper">
                     <a href="a/{{ article.url_title }}/">
-                        <img src="{{ article.article_image }}" alt="{{ article.title }}">
+                        <img loading="lazy" src="{{ article.article_image }}" alt="{{ article.title }}">
                     </a>
                     <div class="article-content">
                         <h3>
@@ -63,13 +63,14 @@
             
             {% endfor %}
         </div>
+        </br>
         <div>
             <h2>TRENDING</h2>
             <div class="card-section">
-                {% for article in articles %}
+                {% for article in trending_articles %}
                     <div class="article-card">
                         <a href="a/{{ article.url_title }}/">
-                            <img src="{{ article.article_image }}" alt="{{ article.title }}">
+                            <img loading="lazy" src="{{ article.article_image }}" alt="{{ article.title }}">
                         </a>
                         <span class="category-btn">
                             <a href="#">{{ article.category.name }}</a>
