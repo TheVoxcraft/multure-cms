@@ -5,6 +5,35 @@ body {
 h2 {
     font-weight: 300;
 }
+
+h1 a {
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+h3 a {
+    color: black;
+    text-decoration: none;
+    transition: all 0.15s;
+}
+
+h3 a:hover {
+    color: #1ad1bd;
+}
+
+h1 a:hover {
+    color: #1ad1bd;
+}
+
+a img {
+    transition: all 0.15s;
+}
+
+a img:hover {
+    transform: scale(1.02);
+}
+
 .hero-container {
     display: flex;
     justify-content: center;

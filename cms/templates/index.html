@@ -11,9 +11,15 @@
 <div class="hero-container">
     <div class="hero-wrapper">
         <div class="hero-article main-hero">
-            <img src="{{ hero_articles.0.article_image }}" alt="">
+            <a href="a/{{ hero_articles.0.url_title }}/">
+                <img src="{{ hero_articles.0.article_image }}" alt="">
+            </a>
             <div style="position: relative;">
-                <h1>{{ hero_articles.0.title }}</h1>
+                <h1>
+                    <a href="a/{{ hero_articles.0.url_title }}/">
+                        {{ hero_articles.0.title }}
+                    </a>
+                </h1>
                 <span class="category-btn category-btn-over">
                     <a href="#">{{ hero_articles.0.category.name }}</a>
                 </span>
@@ -21,9 +27,15 @@
         </div>
         {% for article in hero_articles|slice:"1:" %}
             <div class="hero-article">
-                <img src="{{ article.article_image }}" alt="{{ article.title }}">
+                <a href="a/{{ article.url_title }}/">
+                    <img src="{{ article.article_image }}" alt="{{ article.title }}">
+                </a>
                 <div style="position: relative;">
-                    <h1>{{ article.title }}</h1>
+                    <h1>
+                        <a href="a/{{ article.url_title }}/">
+                            {{ article.title }}
+                        </a>
+                    </h1>
                 </div>
             </div>
         {% endfor %}
@@ -36,12 +48,19 @@
             <h2>LATEST STORIES</h2>
             {% for article in articles %}
                 <div class="article-wrapper">
-                    <img src="{{ article.article_image }}" alt="{{ article.title }}">
+                    <a href="a/{{ article.url_title }}/">
+                        <img src="{{ article.article_image }}" alt="{{ article.title }}">
+                    </a>
                     <div class="article-content">
-                        <h3>{{ article.title }}</h3>
+                        <h3>
+                            <a href="a/{{ article.url_title }}/">
+                            {{ article.title }}
+                            </a>
+                        </h3>
                         <p>Lorem ipsum article to read</p>
                     </div>
                 </div>
+            
             {% endfor %}
         </div>
         <div>
@@ -49,12 +68,18 @@
             <div class="card-section">
                 {% for article in articles %}
                     <div class="article-card">
-                        <img src="{{ article.article_image }}" alt="{{ article.title }}">
+                        <a href="a/{{ article.url_title }}/">
+                            <img src="{{ article.article_image }}" alt="{{ article.title }}">
+                        </a>
                         <span class="category-btn">
                             <a href="#">{{ article.category.name }}</a>
                         </span>
                         <div class="article-content">
-                            <h3>{{ article.title }}</h3>
+                            <h3>
+                                <a href="a/{{ article.url_title }}/">
+                                {{ article.title }}
+                                </a>
+                            </h3>
                             <p>Lorem ipsum article to read</p>
                         </div>
                     </div>
