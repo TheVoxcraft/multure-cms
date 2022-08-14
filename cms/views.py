@@ -5,9 +5,9 @@ from .models import Author, Category, Article
 
 def home(request):
     # Get all articles, order by published_date
-    articles = Article.objects.all().order_by('-published_date')
+    articles = Article.objects.all().filter(published=True).order_by('-published_date')
     
-    hero_articles = articles[:3]
+    hero_articles = sorted(articles[:3], key=lambda x: x.views, reverse=True) # latest 3 articles sorted by views
     trending = articles.order_by('-views')
     return render(request, 'index.html', {'articles': articles, 
                                           'hero_articles': hero_articles, 

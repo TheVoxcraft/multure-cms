@@ -15,8 +15,10 @@ class Category(models.Model):
         return self.name
 
 class ArticleMetadata(models.Model):
+    parent = models.OneToOneField('Article', on_delete=models.CASCADE, null=True, blank=True)
     topic = models.CharField(max_length=100, null=True, blank=True)
     short_summary = models.TextField(null=True, blank=True)
+    tokens_used = models.IntegerField(default=0)
     
 
 class Article(models.Model):
@@ -31,6 +33,8 @@ class Article(models.Model):
     content = models.TextField(blank=True)
     
     views = models.IntegerField(default=0)
-    metadata = models.OneToOneField(ArticleMetadata, on_delete=models.CASCADE, null=True, blank=True)
+    
+    def __str__(self):
+        return self.title + ' by ' + self.author.name
 
 

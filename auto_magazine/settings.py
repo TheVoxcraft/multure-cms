@@ -123,3 +123,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+OPENAI_API_KEY = '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'
+HUGGINGFACE_API_KEY = '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'
