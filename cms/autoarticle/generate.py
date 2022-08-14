@@ -1,5 +1,5 @@
-from model import OpenAIAPI, OpenAIModelTypes
-import builder
+from .model import OpenAIAPI, OpenAIModelTypes
+from . import builder
 from random import randint, shuffle, choice
 
 
@@ -10,20 +10,11 @@ class ArticleGenerator():
     def new_article_name(self):
         base_articles = """* The Complete Guide to Rum Styles
 * The Definitive Guide to Collector watches
-* Finding the best gift for your friend's dad
-* What to wear on a first date
-* How to be a better husband
-* The art of the pickup 
-* How to make your man fall in love with you 
-* 5 signs your man is cheating
-* The ultimate guide to understanding your man
-* 10 signs your man is interested in you
-* How to make your husband a better father
-* 10 things only men understand""".split("\n")
+* Finding the best gift for your friend""".split("\n")
         shuffle(base_articles)
         prompt_base_articles = '\n'.join(base_articles)
-        new_articles = self.model.prompt(f"# List over informative and interesting articles titles for men's magazine:\n{prompt_base_articles}\n",
-                                        model=OpenAIModelTypes.curie, temperature=0.8, max_tokens=96, frequency_penalty=0.3, presence_penalty=0.9)
+        new_articles = self.model.prompt(f"# List over interesting article titles for a men's magazine:\n{prompt_base_articles}\n",
+                                        model=OpenAIModelTypes.curie, temperature=0.8, max_tokens=96, frequency_penalty=0.3, presence_penalty=0.8)
         return choice(new_articles.strip().replace("*", "").split("\n")).strip()
     
     def write_independant_article(self, title):
@@ -37,8 +28,8 @@ class ArticleGenerator():
         article.add(builder.Text(introduction))
         
         c1_name, c1 = self.__split_chapter(chapter_1)
-        article.add(builder.Chapter(' Things to keep in mind'+c1_name))
-        article.add(builder.Text(c1))
+        article.add(builder.Chapter(' Things to keep in mind '))
+        article.add(builder.Text(c1_name+'\n'+c1))
         
         c2_name, c2 = self.__split_chapter(chapter_2)
         article.add(builder.Chapter(c2_name))
@@ -48,17 +39,17 @@ class ArticleGenerator():
         article.add(builder.Chapter(c3_name))
         article.add(builder.Text(c3))
         
-        c_name, c = self.__split_chapter(chapter_3)
-        article.add(builder.Chapter(c_name))
-        article.add(builder.Text(c))
+        article.add(builder.Chapter('Conclusion'))
+        article.add(builder.Text(conclusion))
         
+        print(full_output)
         return article.build()
     
     def __split_chapter(self, chapter_txt):
         arr = chapter_txt.split("\n")
         return arr[0], '\n'.join(arr[1:])
     def _introduction(self, title):
-        prompt = """Article title: What to wear on a first date
+        prompt = f"""Article title: {title}
 Task: Write an interesting and introspective introduction to this article.
 
 # Introduction
@@ -69,13 +60,13 @@ Task: Write an interesting and introspective introduction to this article.
 
     def _next_chapter(self, ctx, chapter=""):
         prompt = ctx + f"\n\n# Chapter:{chapter}"
-        output = self.model.prompt(prompt, model=OpenAIModelTypes.curie, temperature=0.77, max_tokens=256, stop='#')
+        output = self.model.prompt(prompt, model=OpenAIModelTypes.curie, temperature=0.8, max_tokens=256, stop='#', frequency_penalty=0.2, presence_penalty=0.6)
         full_context = prompt + output
         return output.strip(), full_context
     
     def _conclusion(self, ctx):
         prompt = ctx + """
-# Conclusion:
+# Conclusion
 """
         output = self.model.prompt(prompt, model=OpenAIModelTypes.curie, temperature=0.77, max_tokens=256, stop='#')
         full_context = prompt + output

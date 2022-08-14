@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Author, Category, Article
+from . import tasks
 
 # Create your views here.
 
@@ -24,3 +25,11 @@ def article(request, url_title):
     article.save()
     
     return render(request, 'article.html', {'article': article})
+
+
+def create_independant_article(request):
+    if not request.user.is_superuser:
+        # return 404 error
+        return render(request, '404.html')
+    tasks.generate_independant_article()
+    return redirect('/')

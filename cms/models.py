@@ -24,7 +24,7 @@ class ArticleMetadata(models.Model):
 class Article(models.Model):
     author = models.ForeignKey(Author, on_delete=models.PROTECT)
     category = models.ForeignKey(Category, on_delete=models.PROTECT, null=True)
-    title = models.CharField(max_length=128)
+    title = models.CharField(max_length=128, unique=False)
     published = models.BooleanField(default=True)
     published_date = models.DateTimeField(auto_now_add=True)
     url_title = models.SlugField(max_length=256, unique=True)
@@ -33,6 +33,10 @@ class Article(models.Model):
     content = models.TextField(blank=True)
     
     views = models.IntegerField(default=0)
+    
+    @property
+    def metadata(self):
+        return ArticleMetadata.objects.get(parent=self)
     
     def __str__(self):
         return self.title + ' by ' + self.author.name

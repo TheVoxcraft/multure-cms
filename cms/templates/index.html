@@ -57,7 +57,7 @@
                             {{ article.title }}
                             </a>
                         </h3>
-                        <p>Lorem ipsum article to read</p>
+                        <p>{{article.metadata.short_summary}}</p>
                     </div>
                 </div>
             
@@ -81,7 +81,7 @@
                                 {{ article.title }}
                                 </a>
                             </h3>
-                            <p>Lorem ipsum article to read</p>
+                            <p>{{article.metadata.short_summary}}</p>
                         </div>
                     </div>
                 {% endfor %}
