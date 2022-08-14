@@ -70,11 +70,16 @@ p a:hover{
     justify-content: center;
 }
 
+.hero-title {
+    margin-bottom: 0.25rem;
+}
+
 .hero-img {
     width: 100%;
     max-width: 1000px;
     height: auto;
 }
+
 .hero {
     display: flex;
     flex-direction: column;
@@ -111,6 +116,20 @@ p a:hover{
     box-shadow: none !important;
 }
 
+.hero-category {
+    display: block;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 1.2rem;
+    color: #81623e;
+    text-align: center;
+    margin-top: 0;
+
+    border: none;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    text-decoration: none;
+} 
+
 /* Desktop */
 @media (min-width: 1180px) {
     p {
@@ -120,7 +139,7 @@ p a:hover{
         font-size: 1.8rem;
     }
     h1 {
-        font-size: 2.25rem;
+        font-size: 2.35rem;
     }
 
     .container {
@@ -136,6 +155,17 @@ p a:hover{
         width: 32rem;
         line-height: 1.5;
         text-align: left;
+    }
+
+    .hero-category {
+        position: absolute;
+        bottom: 18rem;
+        left: -41rem;
+        text-align: left;
+
+        font-family: "Archivo Black", sans-serif;
+        text-transform: uppercase !important;
+        font-size: 1.5rem;
     }
 
     .hero-title span {
