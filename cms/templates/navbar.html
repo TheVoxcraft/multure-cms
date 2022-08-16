@@ -17,10 +17,11 @@
             <input type="text" placeholder="Type something">
         </div>
         <div class="category-wrapper">
-            <a href='#'>Style</a>
-            <a href='#'>Tech</a>
-            <a href='#'>Home</a>
-            <a href='#'>Life</a>
+            {% load cms_tags %}
+            {% get_category_list as category_list %}
+            {% for category in category_list %}
+                <a href="/search/{{category.name}}/latest/1/">{{ category.name }}</a>
+            {% endfor %}
         </div>
     </div>
 </header>
@@ -39,5 +40,14 @@
     $('#close-window').click(function(){
         $('.search-window').fadeOut(150);
         window.location.hash = '#';
+    });
+
+    // on input enter key
+    $('.big-search input').keypress(function(e){
+        if(e.which == 13) {
+            let value = $(this).val();
+            // send to search page
+            window.location.href = '/search/all/latest/1/' + value;
+        }
     });
 </script>

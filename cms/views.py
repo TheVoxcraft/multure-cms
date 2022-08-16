@@ -39,7 +39,11 @@ def search(request, category, order_by, page, search_term=None):
     else: # Fail
         return render(request, '404.html')
     if category != 'all':
-        articles = articles.filter(category__name=category)
+        if category in [c.name for c in Category.objects.all()]:
+            articles = articles.filter(category__name=category)
+        else:
+            return render(request, '404.html')
+
     if search_term:
         articles = articles.filter(title__icontains=search_term)
     
