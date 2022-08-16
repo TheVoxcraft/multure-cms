@@ -29,7 +29,7 @@ class Article(models.Model):
     published_date = models.DateTimeField(auto_now_add=True)
     url_title = models.SlugField(max_length=256, unique=True)
     tags = models.CharField(max_length=128, blank=True, null=True)
-    article_image = models.CharField(max_length=256, blank=True)
+    article_image = models.CharField(max_length=512, blank=True)
     content = models.TextField(blank=True)
     
     views = models.IntegerField(default=0)

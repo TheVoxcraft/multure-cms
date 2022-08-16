@@ -62,4 +62,8 @@ class ZeroShotClassificationAPI:
       "parameters": {"candidate_labels": candidate_labels},
       }
     output = requests.post(self.API_URL, headers=self.headers, json=payload).json()
-    return sorted(list(zip(output['labels'], output['scores'])), key=lambda x: x[1], reverse=True)
+    try:
+      return sorted(list(zip(output['labels'], output['scores'])), key=lambda x: x[1], reverse=True)
+    except Exception:
+      print('error',output)
+      return None

@@ -13,7 +13,7 @@ class ArticleGenerator():
 * Finding the best gift for your friend""".split("\n")
         shuffle(base_articles)
         prompt_base_articles = '\n'.join(base_articles)
-        new_articles = self.model.prompt(f"# List over interesting article titles for a men's magazine:\n{prompt_base_articles}\n",
+        new_articles = self.model.prompt(f"# List over interesting article titles for a lifestyle and technology magazine:\n{prompt_base_articles}\n",
                                         model=OpenAIModelTypes.curie, temperature=0.8, max_tokens=96, frequency_penalty=0.3, presence_penalty=0.8)
         return choice(new_articles.strip().replace("*", "").split("\n")).strip()
     
@@ -22,27 +22,34 @@ class ArticleGenerator():
         chapter_1, ctx = self._next_chapter(ctx, ' Things to keep in mind')
         chapter_2, ctx = self._next_chapter(ctx)
         chapter_3, ctx = self._next_chapter(ctx)
-        conclusion, full_output = self._conclusion(ctx)
+        chapter_4, ctx = self._next_chapter(ctx)
+        
         
         article = builder.ArticleBuilder()
         article.add(builder.Text(introduction))
         
-        c1_name, c1 = self.__split_chapter(chapter_1)
+        c_name, c_next = self.__split_chapter(chapter_1)
         article.add(builder.Chapter(' Things to keep in mind '))
-        article.add(builder.Text(c1_name+'\n'+c1))
+        article.add(builder.Text(c_next+'\n'+c_name))
         
-        c2_name, c2 = self.__split_chapter(chapter_2)
-        article.add(builder.Chapter(c2_name))
-        article.add(builder.Text(c2))
+        c_name, c_next = self.__split_chapter(chapter_2)
+        article.add(builder.Chapter(c_name))
+        article.add(builder.Text(c_next))
         
-        c3_name, c3 = self.__split_chapter(chapter_3)
-        article.add(builder.Chapter(c3_name))
-        article.add(builder.Text(c3))
+        c_name, c_next = self.__split_chapter(chapter_3)
+        article.add(builder.Chapter(c_name))
+        article.add(builder.Text(c_next))
         
-        article.add(builder.Chapter('Conclusion'))
-        article.add(builder.Text(conclusion))
+        c_name, c_next = self.__split_chapter(chapter_4)
+        article.add(builder.Chapter(c_name))
+        article.add(builder.Text(c_next))
         
-        print(full_output)
+        if 'conclusion' not in ctx and 'Conclusion' not in ctx:
+            conclusion, ctx = self._conclusion(ctx)
+            article.add(builder.Chapter('Conclusion'))
+            article.add(builder.Text(conclusion))
+        
+        print(ctx)
         return article.build()
     
     def __split_chapter(self, chapter_txt):

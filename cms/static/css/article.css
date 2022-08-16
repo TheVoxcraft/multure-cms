@@ -13,6 +13,10 @@ body {
     margin: 0 auto;
 }
 
+img {
+    object-fit: cover;
+}
+
 .chapter {
     text-align: center;
     font-size: 1.25em;

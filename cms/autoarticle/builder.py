@@ -8,7 +8,7 @@ class ArticleItem(Protocol):
 
 class Text(ArticleItem):
     def __init__(self, content: str):
-        self.content = escape(content.strip())
+        self.content = content.strip()
         
     def to_html(self) -> str:
         content = self.content.replace('\n\n', '\n<br>\n')
@@ -16,8 +16,8 @@ class Text(ArticleItem):
 
 class Chapter(ArticleItem):
     def __init__(self, content: str, subtitle: str = ""):
-        self.content = escape(content.strip())
-        self.subtitle = escape(subtitle.strip())
+        self.content = content.strip()
+        self.subtitle = subtitle.strip()
         
     def to_html(self) -> str:
         return f"""
@@ -29,8 +29,8 @@ class Chapter(ArticleItem):
 
 class Image(ArticleItem):
     def __init__(self, content: str, caption: str):
-        self.content = escape(content.strip())
-        self.caption = escape(caption.strip())
+        self.content = content.strip()
+        self.caption = caption.strip()
         
     def to_html(self) -> str:
         return f"""
