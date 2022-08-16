@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}AutoMagazine{% endblock %}
+
+{% block head_page%}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock head_page %}
+
+{% block content %}
+</br></br></br></br>
+<div class="flex-center">
+    <div style="width: 75%">
+        <div class="article-section">
+            <h2 style="width:100%;">{{category|upper}} {{order_by|upper}} STORIES <span style="color: #cccccc;float: right;">PAGE {{page}}</span></h2>
+            {% for article in articles %}
+                <div class="article-wrapper">
+                    <a href="a/{{ article.url_title }}/">
+                        <img loading="lazy" src="{{ article.article_image }}" alt="{{ article.title }}">
+                    </a>
+                    <div class="article-content">
+                        <h3>
+                            <a href="a/{{ article.url_title }}/">
+                            {{ article.title }}
+                            </a>
+                        </h3>
+                        <p>{{article.metadata.short_summary|truncatechars:256   }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="page-control">
+    <a class='button' href='{{prev_page_url}}'>LAST PAGE</a>
+    <a class='button' href='{{next_page_url}}'>NEXT PAGE</a>
+</div>
+{% endblock content %}

@@ -57,7 +57,7 @@
                             {{ article.title }}
                             </a>
                         </h3>
-                        <p>{{article.metadata.short_summary}}</p>
+                        <p>{{article.metadata.short_summary|truncatechars:256   }}</p>
                     </div>
                 </div>
             
@@ -81,7 +81,7 @@
                                 {{ article.title }}
                                 </a>
                             </h3>
-                            <p>{{article.metadata.short_summary}}</p>
+                            <p>{{article.metadata.short_summary|truncatechars:170}}</p>
                         </div>
                     </div>
                 {% endfor %}

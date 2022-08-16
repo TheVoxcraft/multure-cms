@@ -22,7 +22,7 @@ class MetadataGenerator():
         prompt = f"""# Article: {article_title}
 {article_content}
 
-# Short summary of this article:
+# Short, concise summary of this article:
 """
         return self.model_api.prompt(prompt, model=OpenAIModelTypes.babbage, max_tokens=128)
     

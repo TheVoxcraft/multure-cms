@@ -139,6 +139,57 @@ a img:hover {
     max-width: 700px;
 }
 
+
+
+input:focus {
+    outline-width: 0;
+}
+
+.search-window {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(244, 244, 244);
+    z-index: 1;
+    padding: 2rem;
+}
+
+.search-window .category-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1.5em;
+    margin: 2em;
+    margin-left: 5em;
+    max-height: 40%;
+}
+.category-wrapper a {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 3rem;
+    width: 3.2rem;
+
+    color: black;
+    text-decoration: none;
+    transition: all 0.125s;
+}
+
+.search-window input {
+    background-color: transparent;
+    border: none;
+    font-size: 4rem;
+    margin: 1rem;
+    padding-left: 3rem;
+    color: #989898;
+    font-weight: 800;
+}
+
+.category-wrapper a:hover {
+    color: #1ad1bd;
+    border-bottom: 8px solid #1ad1bd;
+}
+
 /* Desktop */
 @media (min-width: 780px) {
     .category-btn {
@@ -157,6 +208,17 @@ a img:hover {
         top: -11rem;
         font-size: 2.5rem !important;
     }
+    .search-window input {
+        font-size: 6rem;
+        font-weight: 600;
+    }
+}
+
+@media (min-width: 1000px) {
+    .search-window input {
+        font-size: 9rem;
+        font-weight: 500;
+    }
 }
 
 /* Very small */
@@ -170,4 +232,40 @@ a img:hover {
     .article-section {
         margin: 0.5rem;
     }
+    .search-window {
+        padding: 0.5rem;
+    }
+    .search-window input {
+        font-size: 3rem;
+        font-weight: 900;
+    }
+}
+
+a.button {
+    display: inline-block;
+    font-family: "Archivo Black", sans-serif;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    line-height: 1;
+    color: black;
+
+    padding: 1rem 1.6rem;
+    border: 2px solid black ;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    margin: 0.5rem;
+}
+
+a.button:hover {
+    color: #1ad1bd;
+    border-bottom: 8px solid #1ad1bd;
+}
+
+.page-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.2rem;
+    gap: 3rem;
+    margin-bottom: 6rem;
 }

@@ -23,6 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', cms.views.home, name='home'),
     path('a/<str:url_title>/', cms.views.article, name='article'),
+    path('search/<str:category>/<str:order_by>/<int:page>/', cms.views.search, name='category_search'),
+    path('search/<str:category>/<str:order_by>/<int:page>/<str:search_term>/', cms.views.search, name='search'),
     #path('category/<str:category_name>/', cms.views.category, name='category'),
     path('endpoint/createnow', cms.views.create_independant_article, name='create_article'),
     
