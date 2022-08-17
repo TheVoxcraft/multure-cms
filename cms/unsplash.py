@@ -1,4 +1,3 @@
-from unittest import result
 import requests
 
 def query_unsplash(query, api_key):

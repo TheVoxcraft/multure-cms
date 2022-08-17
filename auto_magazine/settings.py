@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_beat',
     'cms'
 ]
 
@@ -124,6 +125,17 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+# Celery Configuration Options
+
+CELERY_TIMEZONE = 'Europe/Oslo'
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+
+
+# celery broker rabbitmq
+# create cmd: sudo rabbitmqctl add_user auto_user devpassword ; sudo rabbitmqctl add_vhost multure ; sudo rabbitmqctl set_user_tags multure mytag ; sudo rabbitmqctl set_permissions -p multure auto_user ".*" ".*" ".*";
+CELERY_BROKER_URL = 'amqp://auto_user:devpassword@localhost/multure'
 
 OPENAI_API_KEY = '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'
 HUGGINGFACE_API_KEY = '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'
