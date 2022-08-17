@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-&ss4a5h7#-$tin!sizg1n*t95rb&(5r5$d6r29*8752))@eu9z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG', default=False)
+DEBUG = env('DEBUG', default=True)
 
 ALLOWED_HOSTS = ['*']
 
@@ -123,7 +123,8 @@ APPEND_SLASH = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = env('STATIC_ROOT', default=BASE_DIR / 'static')
+if not DEBUG:
+    STATIC_ROOT = env('STATIC_ROOT', default=BASE_DIR / 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -139,7 +140,7 @@ CELERY_TASK_TIME_LIMIT = 30 * 60
 
 
 # celery broker rabbitmq
-# create cmd: sudo rabbitmqctl add_user auto_user devpassword ; sudo rabbitmqctl add_vhost multure ; sudo rabbitmqctl set_user_tags multure mytag ; sudo rabbitmqctl set_permissions -p multure auto_user ".*" ".*" ".*";
+# sudo rabbitmqctl add_user auto_user devpassword ; sudo rabbitmqctl add_vhost multure ; sudo rabbitmqctl set_user_tags multure mytag ; sudo rabbitmqctl set_permissions -p multure auto_user ".*" ".*" ".*";
 CELERY_BROKER_URL = 'amqp://auto_user:devpassword@localhost/multure'
 
 OPENAI_API_KEY = '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'
