@@ -47,7 +47,7 @@ class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'category', 'tags', 'published', 'published_date', 'views')
     search_fields = ('title','author', 'category', 'tags')
     list_filter = ('author__name', 'category',)
-    ordering = ('title',)
+    ordering = ('-published_date',)
     inlines = [ArticleMetadataInline]
     
     actions = [generate_article_content, generate_article_metadata]

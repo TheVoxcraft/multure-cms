@@ -10,6 +10,9 @@ from .models import Article, ArticleMetadata, Author, Category
 from .autoarticle.metadata import MetadataGenerator
 from . import unsplash
 
+import celery
+
+@celery.shared_task()
 def generate_article_metadata(article : Article):
     # Check if a metadata object already exists for this article
     metadata = ArticleMetadata.objects.filter(parent=article).first()
@@ -39,26 +42,31 @@ def generate_article_metadata(article : Article):
     
     if article.article_image is None or article.article_image == '':
         print("Setting image for article")
-        set_image_from_tags(article)
+        _set_image_from_tags(article)
 
 
-def generate_article_content(article: Article):
-    pass
-
-
-def generate_independant_article():
+@celery.shared_task()
+def generate_independant_article(category_name : str=None):
     model = OpenAIAPI(settings.OPENAI_API_KEY)
     generator = ArticleGenerator(model)
     
-    article_title = generator.new_article_name()
-    article_body = generator.write_independant_article(article_title)
+    if category_name is None:
+        article_title = generator.new_article_name()
+    else:
+        article_title = generator.new_category_article_name(category_name)
+    
+    print(f"Writing a {category_name} article: {article_title}")
+    article_body = generator.write_independant_article(article_title, category_name)
+    
+    # Random author
+    selected_author = Author.objects.order_by('?').first()
     
     # Create article object
-    article = Article.objects.create(title=article_title, content=article_body, url_title=slugify(article_title), author=Author.objects.first())
+    article = Article.objects.create(title=article_title, content=article_body, url_title=slugify(article_title), author=selected_author)
     generate_article_metadata(article)
 
 
-def set_image_from_tags(article : Article):
+def _set_image_from_tags(article : Article):
     tags = article.tags.split(',')
     image_src = unsplash.get_image_by_query(' '.join(tags[:3]), settings.UNSPLASH_API_KEY)
     article.article_image = image_src

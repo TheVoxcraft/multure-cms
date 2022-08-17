@@ -1,0 +1,1 @@
+celery -A auto_magazine beat --loglevel=info --scheduler django_celery_beat.schedulers:DatabaseScheduler

@@ -1,3 +1,4 @@
+from random import choice
 from django.shortcuts import render, redirect
 from .models import Author, Category, Article
 from . import tasks
@@ -63,5 +64,10 @@ def create_independant_article(request):
     if not request.user.is_superuser:
         # return 404 error
         return render(request, '404.html')
-    tasks.generate_independant_article()
+    if not request.user.is_authenticated:
+        return render(request, '404.html')
+    
+    categories = [c.name for c in Category.objects.all()]
+    
+    tasks.generate_independant_article.delay(choice(categories))
     return redirect('/')

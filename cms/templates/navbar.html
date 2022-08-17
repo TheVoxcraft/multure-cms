@@ -1,7 +1,7 @@
 <header>
     <nav>
         <div class="navbar">
-            <a> Menu </a>
+            <a href="#search" id='search-btn'>Menu</a>
             <a href="/">
                 {% load static %}
                 <img class='navbar-logo' src="{% static 'img/logo.png' %}" alt="logo">
@@ -32,11 +32,14 @@
         $('.search-window').css('visibility', 'visible');
         $('.search-window').css('display', 'block');
     }
-    $('#search-btn').click(function(){
-        console.log('clicked');
-        $('.search-window').css('visibility', 'visible');
-        $('.search-window').fadeIn(100);
+    
+    $('*[id=search-btn]').each(function() {
+        $(this).click(function(){
+            $('.search-window').css('visibility', 'visible');
+            $('.search-window').fadeIn(100);
+        });
     });
+    
     $('#close-window').click(function(){
         $('.search-window').fadeOut(150);
         window.location.hash = '#';
