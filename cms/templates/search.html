@@ -10,7 +10,7 @@
 {% block content %}
 </br></br></br></br>
 <div class="flex-center">
-    <div style="width: 75%">
+    <div style="articles">
         <div class="article-section">
             <h2 style="width:100%;">{{category|upper}} {{order_by|upper}} STORIES <span style="color: #cccccc;float: right;">PAGE {{page}}</span></h2>
             {% for article in articles %}
@@ -18,7 +18,7 @@
                     <a href="/a/{{ article.url_title }}/">
                         <img loading="lazy" src="{{ article.article_image }}" alt="{{ article.title }}">
                     </a>
-                    <div class="article-content">
+                    <div class="article-content max-width-desktop">
                         <h3>
                             <a href="/a/{{ article.url_title }}/">
                             {{ article.title }}
