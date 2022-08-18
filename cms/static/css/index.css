@@ -216,6 +216,9 @@ input:focus {
     .articles {
         width: 75%;
     }
+    .max-width-desktop {
+        max-width: 60%;
+    }
 }
 
 @media (min-width: 1000px) {
