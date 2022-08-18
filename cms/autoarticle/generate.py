@@ -55,7 +55,7 @@ class ArticleGenerator():
 Task: Write an interesting and introspective introduction to this article.
 """
         prompt = base_prompt + "\n# Chapter: Introduction"
-        output = self.model.prompt(prompt, model=OpenAIModelTypes.curie, temperature=0.77, max_tokens=256, stop='#')
+        output = self.model.prompt(prompt, model=OpenAIModelTypes.curie, temperature=0.77, max_tokens=368, stop='#')
         full_context = prompt + output
         return output.strip(), full_context[len(base_prompt):].strip()
 
