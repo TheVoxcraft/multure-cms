@@ -15,12 +15,12 @@
             <h2 style="width:100%;">{{category|upper}} {{order_by|upper}} STORIES <span style="color: #cccccc;float: right;">PAGE {{page}}</span></h2>
             {% for article in articles %}
                 <div class="article-wrapper">
-                    <a href="a/{{ article.url_title }}/">
+                    <a href="/a/{{ article.url_title }}/">
                         <img loading="lazy" src="{{ article.article_image }}" alt="{{ article.title }}">
                     </a>
                     <div class="article-content">
                         <h3>
-                            <a href="a/{{ article.url_title }}/">
+                            <a href="/a/{{ article.url_title }}/">
                             {{ article.title }}
                             </a>
                         </h3>
