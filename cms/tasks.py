@@ -11,6 +11,7 @@ from .autoarticle.metadata import MetadataGenerator
 from . import unsplash
 
 import celery
+from random import choice
 
 @celery.shared_task()
 def generate_article_metadata(article : Article):
@@ -44,9 +45,15 @@ def generate_article_metadata(article : Article):
         print("Setting image for article")
         _set_image_from_tags(article)
 
+@celery.shared_task()
+def generate_independant_article_with_category():
+    categories = [c.name for c in Category.objects.all()]
+    category = choice(categories)
+    generate_independant_article(category)
+
 
 @celery.shared_task()
-def generate_independant_article(category_name : str=None):
+def generate_independant_article(category_name : str):
     model = OpenAIAPI(settings.OPENAI_API_KEY)
     generator = ArticleGenerator(model)
     

@@ -45,7 +45,6 @@ class ArticleGenerator():
         article = article.replace("\n\n", "\n<br>\n") # Replace double newlines with <br> tags
         article = re.sub(r"#\s*[c|C]hapter:\s*(.+)\n", '\n<div class="chapter">\n<h2>\\1</h2>\n</div>\n', article) # Replace chapters with chapter tags
                 
-        print(article)
         return article
     
 

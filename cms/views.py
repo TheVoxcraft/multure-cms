@@ -67,7 +67,5 @@ def create_independant_article(request):
     if not request.user.is_authenticated:
         return render(request, '404.html')
     
-    categories = [c.name for c in Category.objects.all()]
-    
-    tasks.generate_independant_article.delay(choice(categories))
+    tasks.generate_independant_article_with_category.delay()
     return redirect('/')
