@@ -147,15 +147,23 @@ input:focus {
 }
 
 .search-window {
-    position: absolute;
+    display: block;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgb(244, 244, 244);
     z-index: 1;
+    overflow-x: hidden;
     padding: 2rem;
 }
+
+.window-hidden {
+    display: none !important;
+    visibility: hidden !important;
+}
+
 
 .search-window .category-wrapper {
     display: flex;
