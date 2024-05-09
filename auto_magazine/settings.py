@@ -142,6 +142,6 @@ CELERY_TASK_TIME_LIMIT = 30 * 60
 # sudo rabbitmqctl add_user auto_user devpassword ; sudo rabbitmqctl add_vhost multure ; sudo rabbitmqctl set_user_tags multure mytag ; sudo rabbitmqctl set_permissions -p multure auto_user ".*" ".*" ".*";
 CELERY_BROKER_URL = 'amqp://auto_user:devpassword@localhost/multure'
 
-OPENAI_API_KEY = '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'
-HUGGINGFACE_API_KEY = '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'
-UNSPLASH_API_KEY = 'dgH-uIAp5y4H8lWDUMlYBGqcl0zRYw3y57hwgM5SiiY'
+OPENAI_API_KEY = ''
+HUGGINGFACE_API_KEY = ''
+UNSPLASH_API_KEY = ''
